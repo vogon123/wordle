@@ -11,7 +11,6 @@ Wordle::Wordle(const std::string& dictionary)
     : secret_word(get_word(dictionary))
     , secret_letters(secret_word.begin(), secret_word.end())
 {
-    std::cout << secret_word << std::endl;
 }
 
 GuessResponse Wordle::guess(const std::string& word)
