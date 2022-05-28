@@ -3,6 +3,7 @@
 #include <ctime>
 #include <fstream>
 #include <iostream>
+#include <locale>
 #include <sstream>
 #include <vector>
 
@@ -20,15 +21,17 @@ GuessResponse Wordle::guess(const std::string& word)
 
     for (int i{ 0 }; i < secret_word.size(); ++i)
     {
-        const char letterToCheck{ word[i] };
+        const auto letterToCheck{ word[i] };
+        const auto loweredLetter{ std::tolower(letterToCheck, std::locale()) };
 
-        if (letterToCheck == secret_word[i])
+
+        if (loweredLetter == secret_word[i])
         {
             checkedWord += exact_print(letterToCheck);
         }
         else
         {
-            if (secret_letters.count(letterToCheck))
+            if (secret_letters.count(loweredLetter))
             {
                 checkedWord += contains_print(letterToCheck);
             }
