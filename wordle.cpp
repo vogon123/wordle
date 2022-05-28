@@ -10,6 +10,7 @@ Wordle::Wordle(const std::string& dictionary)
     : secret_word(get_word(dictionary))
     , secret_letters(secret_word.begin(), secret_word.end())
 {
+    std::cout << secret_word << std::endl;
 }
 
 GuessResponse Wordle::guess(const std::string& word)
@@ -19,19 +20,21 @@ GuessResponse Wordle::guess(const std::string& word)
 
     for (int i{ 0 }; i < secret_word.size(); ++i)
     {
-        if (word[i] == secret_word[i])
+        const char letterToCheck{ word[i] };
+
+        if (letterToCheck == secret_word[i])
         {
-            checkedWord += exact_print(word[i]);
+            checkedWord += exact_print(letterToCheck);
         }
         else
         {
-            if (secret_letters.count(secret_word[i]))
+            if (secret_letters.count(letterToCheck))
             {
-                checkedWord += contains_print(secret_word[i]);
+                checkedWord += contains_print(letterToCheck);
             }
             else
             {
-                checkedWord += secret_word[i];
+                checkedWord += letterToCheck;
             }
 
             isMatch = false;
