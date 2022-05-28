@@ -8,6 +8,7 @@
 
 Wordle::Wordle(const std::string& dictionary)
     : secret_word(get_word(dictionary))
+    , secret_letters(secret_word.begin(), secret_word.end())
 {
 }
 
@@ -22,18 +23,21 @@ GuessResponse Wordle::guess(const std::string& word)
         {
             checkedWord += exact_print(word[i]);
         }
-        else if (true) // if the letter from word exists in secret word
-        {
-            checkedWord += contains_print(secret_word[i]);
-            isMatch = false;
-        }
         else
         {
-            checkedWord += secret_word[i];
+            if (secret_letters.count(secret_word[i]))
+            {
+                checkedWord += contains_print(secret_word[i]);
+            }
+            else
+            {
+                checkedWord += secret_word[i];
+            }
+
             isMatch = false;
         }
     }
-    return {false, word};
+    return {isMatch, checkedWord};
 }
 
 std::string Wordle::get_word(const std::string& filename)
