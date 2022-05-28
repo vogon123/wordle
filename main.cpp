@@ -9,9 +9,11 @@ int main()
   int tries{6};
   std::string word;
 
-  while (tries--)
+  while (tries > 0)
   {
-      std::cout << "Please enter the guess word: ";
+      std::cout << "Please enter the guess word (" << tries << " attempts left): ";
+      --tries;
+
       std::cin >> word;
 
       // need a word validation here
@@ -21,16 +23,20 @@ int main()
       if (resp.first)
       {
           std::cout << "Congrats! You guessed the word :)\n";
+          break;
+      }
+
+      if (tries)
+      {
+          std::cout << "Bad luck, please hit enter to try again\n";
+          std::cout << resp.second << std::endl;
       }
       else
       {
-          std::cout << "Bad luck, please hit enter to try again\n";
+          std::cout << "Unfortunately, the game is lost\n";
       }
-
-      std::cout << resp.second << std::endl;
 
       // wait until enter is pressed
       std::cin.get();
   }
-  // ...
 }
