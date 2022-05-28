@@ -1,5 +1,16 @@
 #include "wordle.h"
 
+#include <ctime>
+#include <fstream>
+#include <iostream>
+#include <sstream>
+#include <vector>
+
+Wordle::Wordle(const std::string& dictionary)
+    : secret_word(get_word(dictionary))
+{
+}
+
 GuessResponse Wordle::guess(const std::string& word)
 {
     // ...

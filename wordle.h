@@ -1,16 +1,13 @@
-#include <iostream>
-#include <fstream>
-#include <vector>
+#pragma once
+
 #include <string>
-#include <sstream>
 
 using GuessResponse = std::pair<bool, std::string>;
 
-class Wordle
+class Wordle final
 {
  public:
-  explicit Wordle(const std::string& dictionary)
-  : secret_word(get_word(dictionary)) {}
+  explicit Wordle(const std::string& dictionary);
 
   GuessResponse guess(const std::string& word);
 
@@ -19,5 +16,5 @@ class Wordle
   static std::string exact_print(char c);
   static std::string contains_print(char c);
 
-  std::string secret_word;
+  const std::string secret_word;
 };
