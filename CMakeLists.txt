@@ -7,5 +7,7 @@ include_directories(.)
 
 add_executable(wordle
         main.cpp
+        utils.h
+        utils.cpp
         wordle.cpp
         wordle.h)
