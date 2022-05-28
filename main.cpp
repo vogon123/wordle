@@ -1,4 +1,5 @@
 #include "wordle.h"
+#include "utils.h"
 
 #include <iostream>
 
@@ -12,11 +13,15 @@ int main()
   while (tries > 0)
   {
       std::cout << "Please enter the guess word (" << tries << " attempts left): ";
-      --tries;
 
       std::cin >> word;
 
-      // need a word validation here
+      if (!utils::isWordValid(word))
+      {
+          continue;
+      }
+
+      --tries;
 
       const auto& resp = wordle.guess(word);
 
