@@ -13,7 +13,26 @@ Wordle::Wordle(const std::string& dictionary)
 
 GuessResponse Wordle::guess(const std::string& word)
 {
-    // ...
+    bool isMatch{ true };
+    std::string checkedWord;
+
+    for (int i{ 0 }; i < secret_word.size(); ++i)
+    {
+        if (word[i] == secret_word[i])
+        {
+            checkedWord += exact_print(word[i]);
+        }
+        else if (true) // if the letter from word exists in secret word
+        {
+            checkedWord += contains_print(secret_word[i]);
+            isMatch = false;
+        }
+        else
+        {
+            checkedWord += secret_word[i];
+            isMatch = false;
+        }
+    }
     return {false, word};
 }
 
